@@ -65,7 +65,7 @@ if (moyenne >= 12) {
 } else {
     console.log("Désolé, votre moyenne est de " + moyenne + " vous êtes recalé");
 }
-*/
+
 // #################### Prévision ######################
 
 var nb1 = Number(prompt("Entrez nb1 :"));
@@ -81,5 +81,56 @@ if (nb1 > nb2) {
     } else {
         nb1 = 0;
         nb3 = nb3 * 2 + nb2;
+    }
+}
+*/
+
+// #################### Heure suivante ######################
+
+
+var heure;
+var minute;
+var second;
+var recap;
+var result;
+
+
+heure = Number(prompt("Indiquez l'heure"));
+if (heure < 0 || heure > 23) {
+    console.log("Ce n'est pas une heure valide");
+} else {
+    minute = Number(prompt("Indiquez les minutes"));
+    if (minute < 0 || minute > 59) {
+        console.log("Ce ne sont pas des minutes valide");
+    } else {
+        second = Number(prompt("Indiquez les secondes"));
+        if (second < 0 || second > 59) {
+            console.log("Ce ne sont pas des secondes valide");
+        } else {
+            recap = "Vous avez indiqué " + heure + "h: " + minute + "m: " + second + "s";
+            console.log(recap);
+            second++;
+
+            if (second > 59) {
+                minute++;
+                second = "00";
+
+                if (minute > 59) {
+                    heure++;
+                    minute = "00";
+
+                    if (heure > 23) {
+                        heure = "00";
+                    }
+                }
+
+            }
+
+
+            result = "il sera " + heure + "h: " + minute + "m: " + second + "s";
+
+            console.log(result);
+
+        }
     }
 }
