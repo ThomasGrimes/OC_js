@@ -46,7 +46,7 @@ while (nb < 2 || nb > 9) {
 for (var i = 1; i <= 10; i++) {
     console.log(nb + " x " + i + " = " + i * nb);
 }
-*/
+
 
 // ###################### ni oui ni non #################################
 
@@ -55,3 +55,28 @@ var rep = prompt("Voulez-vous jouer au ni oui, ni non ?");
 while ((rep !== "oui") && (rep !== "non")) {
     rep = prompt("Voulez-vous jouer au ni oui, ni non ?");
 }
+
+// ###################### pyramide #################################
+
+var pyramide = "";
+
+for (var i = 1; i <= 7; i++) {
+    pyramide = pyramide + "#";
+    console.log(pyramide);
+}
+*/
+// ###################### Fizz Buzz #################################
+
+for (var i = 1; i <= 100; i++) {
+    if ((i % 5 === 0) && (i % 3 === 0)) {
+        console.log("FizzBuzz");
+    } else if ((i % 5 === 0) && (i % 3 !== 0)) {
+        console.log("Buzz");
+    } else if (i % 3 === 0) {
+        console.log("Fizz");
+    } else {
+        console.log(i);
+    }
+}
+
+
