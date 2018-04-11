@@ -35,7 +35,7 @@ function min(x, y){
 console.log(min(4.5, 5)); // Doit afficher 4.5
 console.log(min(19, 9)); // Doit afficher 9
 console.log(min(1, 1)); // Doit afficher 1
-*/
+
 //############################ Calculer() ##################################
 
 
@@ -63,3 +63,19 @@ console.log(calculer(4, "+", 6)); // Doit afficher 10
 console.log(calculer(4, "-", 6)); // Doit afficher -2
 console.log(calculer(2, "*", 0)); // Doit afficher 0
 console.log(calculer(12, "/", 0)); // Doit afficher Infinity
+*/
+
+//############################ aire() perimetre () ##################################
+
+function aire(rayon) {
+    return (rayon * rayon) * Math.PI;
+}
+
+function perimetre(rayon) {
+    return (rayon * 2) * Math.PI;
+}
+
+var valRayon = prompt("Donnez le rayon du cercle");
+
+console.log("L'aire du cercle est de : " + aire(valRayon) + " cm²");
+console.log("Le perimètre du cercle est de : " + perimetre(valRayon) + " cm");
