@@ -1,104 +1,77 @@
-// ############################## JdR ##################################
-/*
-var perso = {
-    nom: "Aurora",
-    sante: 150,
-    force: 25,
-    xp: 0,
-
-    decrire: function () {
-        var description = this.nom + " a " + this.sante + " points de vie, " + this.force + " en force et " + this.xp + " points d'experience";
-    return description;
-    }
-};
-
-console.log(perso.decrire());
-
-// Aurora est blessée par une flèche
-perso.sante = perso.sante - 20;
-
-// Aurora trouve un bracelet de force
-perso.force = perso.force + 10;
-
-// Aurora apprend une nouvelle compétence
-perso.xp = perso.xp + 15;
-
-console.log(perso.decrire());
-
-// ############################## Chien ##################################
-
-var chien = {
-    nom: "Crockdur",
-    race: "mâtin de Naples",
-    taille: 75,
-
-    aboyer: function () {
-        var grogne="Grrr ! Grrr!"
-        return grogne;
-
-    }
-};
-
-console.log(chien.nom + " est un " + chien.race + " mesurant " + chien.taille + " cm");
-console.log("Tiens, un chat ! " + chien.nom + " aboie : " + chien.aboyer());
-
-
-// ############################## Calcul périmètre ##################################
-
-
-var r = Number(prompt("Entrez le rayon d'un cercle :"));
-
-var cercle = {
-    rayon: r,
-    
-    perimetre: function () {
-        var result = (this.rayon*2)*Math.PI;
-        return result;
+var Personnage = {
+    initPerso: function (nom, sante, force) {
+        this.nom = nom;
+        this.sante = sante;
+        this.force = force;
     },
-    
-    aire: function () {
-        var result = (this.rayon*this.rayon)*Math.PI;
-        return result;
+
+    attaquer: function (cible) {
+        if (this.sante > 0) {
+            var degats = this.force;
+            console.log(this.nom + " attaque " + cible.nom + ". Il lui fait " + degats + " points de dégâts.");
+            cible.sante = cible.sante - degats;
+            if (cible.sante > 0) {
+                console.log(cible.nom + " a encore " + cible.sante + " points de vie.");
+            } else {
+                cible.sante = 0;
+                console.log(cible.nom + " est mort !");
+            }
+        } else {
+            console.log(this.nom + " ne peut pas attaquer car il est décédé.");
+        }
+    }
+};
+
+var Joueur = Object.create(Personnage);
+Joueur.initJoueur = function (nom, sante, force) {
+    this.initPerso(nom, sante, force);
+    this.xp = 0;
+}
+
+Joueur.combattre = function (cible) {
+    this.attaquer(cible);
+    if (cible.sante === 0) {
+        this.xp += cible.valeur;
+        console.log(this.nom + " a tué " + cible.nom + " et gagne " + cible.valeur + " points d'experience.")
     }
 }
 
+Joueur.decrire = function () {
+    var description = this.nom + " a " + this.sante + " points de vie, " +
+        this.force + " en force et " + this.xp + " points d'expérience.";
+    return description;
+}
 
-console.log("Son périmètre vaut " + cercle.perimetre());
-console.log("Son aire vaut " + cercle.aire());
+var Monstre = Object.create(Personnage);
+Monstre.initMonstre = function (nom, sante, force, race, valeur) {
+    this.initPerso(nom, sante, force);
+    this.race = race;
+    this.valeur = valeur;
+}
 
-*/
+var glacius = Object.create(Joueur);
+glacius.initJoueur("Glacius", 130, 30);
 
-// ############################## Compte bancaire ##################################
-
-
-var compte = {
-        titulaire: "Alex",
-        solde: 0,
-
-        crediter: function (x) {
-            this.solde = this.solde + x;
-        },
-
-        debiter: function (x) {
-            this.solde = this.solde - x;
-        },
-        decrire: function () {
-            var result = "Titulaire : " + this.titulaire + ", Solde : " + this.solde;
-            return result;
-        }
-};
+var aurora = Object.create(Joueur);
+aurora.initJoueur("Aurora", 150, 25);
 
 
-console.log(compte.decrire());
 
-var montant = Number(prompt("Combien voulez vous créditer ?"));
+var zogzog = Object.create(Monstre);
+zogzog.initMonstre("Zogzog", 40, 20, "Orc", 10);
 
-compte.crediter(montant);
+console.log("Bienvenue dans ce jeu d'aventure ! Voici nos courageux héros :");
 
-console.log(compte.decrire());
+console.log(aurora.decrire());
+console.log(glacius.decrire());
 
-var debit = Number(prompt("Combien voules vous retirer ?"));
+console.log("Un affreux monstre arrive : c'est un " + zogzog.race + " nommé " + zogzog.nom);
 
-compte.debiter(debit);
+zogzog.attaquer(aurora);
+zogzog.attaquer(glacius);
 
-console.log(compte.decrire());
+aurora.combattre(zogzog);
+glacius.combattre(zogzog);
+
+console.log(aurora.decrire());
+console.log(glacius.decrire());
